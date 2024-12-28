@@ -45,11 +45,6 @@ Public key: 032fb631f581add2ba8a1226442812e6bf6147c66abb6eae9855f46e9b6374b580
 Native Address: tb1qfyanzs5hprvzyt7mwurmlq9vnz64w9xntgvgzz
 Segwit Hash (witness program): 493b31429708d8222fdb7707bf80ac98b55714d3
 Segwit Version: p2wpkhv0
-Created P2wpkhAddress from Segwit Hash and calculate address:
-Native Address: tb1qfyanzs5hprvzyt7mwurmlq9vnz64w9xntgvgzz
-P2SH(P2WPKH): 2N8Z5t3GyPW1hSAEJZqQ1GUkZ9ofoGhgKPf
-P2WSH of P2PK: tb1qy4kdfavhluvnhpwcqmqrd8x0ge2ynnsl7mv2mdmdskx4g3fc6ckq8f44jg
-P2SH(P2WSH of P2PK): 2NC2DBZd3WfEF9cZcpBRDYxCTGCVCfPUf7Q
 ```
 ## Bitcoin Testnet Faucet
 Using a Bitcoin testnet faucet, send some funds to the segwit address
@@ -86,11 +81,6 @@ Public key: 035bfbbd7cea81f580285c98db3f4e00418448a529af5216bf04bfe7814be6abe7
 Native Address: tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
 Segwit Hash (witness program): f831a4aa7afb9831e0269fac83ef8e422b8197b0
 Segwit Version: p2wpkhv0
-Created P2wpkhAddress from Segwit Hash and calculate address:
-Native Address: tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
-P2SH(P2WPKH): 2N8Z5t3GyPW1hSAEJZqQ1GUkZ9ofoGhgKPf
-P2WSH of P2PK: tb1qy4kdfavhluvnhpwcqmqrd8x0ge2ynnsl7mv2mdmdskx4g3fc6ckq8f44jg
-P2SH(P2WSH of P2PK): 2NC2DBZd3WfEF9cZcpBRDYxCTGCVCfPUf7Q
 ```
 Now transfer the funds to the new address
 ```
