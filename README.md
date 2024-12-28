@@ -57,6 +57,23 @@ https://blockstream.info/testnet/tx/057f1e116b7b12bb1c2b64603ae1152b44baaff75f57
 
 Next, wait for the UTXO to show up in the local bitcoin testnet node
 ```
+(myenv) $ bitcoin-cli -testnet getblockchaininfo
+{
+  "chain": "test",
+  "blocks": 2231687,
+  "headers": 3591118,
+  "bestblockhash": "000000000000e1dc72b684468691a821c03adb5e7a5e7cdee7c96c06c2c42c0e",
+  "difficulty": 6.335250616269515,
+  "time": 1653527384,
+  "mediantime": 1653527381,
+  "verificationprogress": 0.5496184945503476,
+  "initialblockdownload": true,
+  "chainwork": "00000000000000000000000000000000000000000000069f7e84745022cf6c2c",
+  "size_on_disk": 30917379976,
+  "pruned": false,
+  "warnings": ""
+}
+
 (myenv) $ bitcoin-cli -testnet scantxoutset start '["addr(tb1qfyanzs5hprvzyt7mwurmlq9vnz64w9xntgvgzz)"]'
 {
   "success": true,
