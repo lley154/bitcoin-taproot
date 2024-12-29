@@ -54,20 +54,28 @@ $ tail -f testnet3/debug.log
 It may take some time for the node to sync to the network and will need to see the height at the current level as seen in the block explorer.
 https://blockstream.info/testnet/
 ```
+$ tail -f testnet3/debug.log
+...
+2024-12-29T15:28:16Z UpdateTip: new best=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db height=35553 version=0x00000002 log2_work=51.065646 tx=57727 date='2012-11-07T08:49:16Z' progress=0.000504 cache=6.3MiB(46533txo)
+2024-12-29T15:28:16Z [bench]   - Connect postprocess: 1.82ms [14.66s (0.41ms/blk)]
+2024-12-29T15:28:16Z [bench] - Connect block: 31.94ms [110.77s (3.12ms/blk)]
+2024-12-29T15:28:16Z [validation] Enqueuing BlockConnected: block hash=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db block height=35553
+2024-12-29T15:28:16Z [validation] Enqueuing UpdatedBlockTip: new block hash=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db fork block hash=0000000000bcf28bcc3f375dea612ab1b589bec0fe76808d3485d4ea7d06ec04 (in IBD=true)
+...
 
 $ bitcoin-cli -testnet getblockchaininfo
 {
   "chain": "test",
-  "blocks": 0,
-  "headers": 25559,
-  "bestblockhash": "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943",
-  "difficulty": 1,
-  "time": 1296688602,
-  "mediantime": 1296688602,
-  "verificationprogress": 8.728336274153364e-09,
+  "blocks": 46170,
+  "headers": 3603648,
+  "bestblockhash": "0000000001051da4ff6f7842db40bac435332bddc406abedf871d03d6487c7a9",
+  "difficulty": 16,
+  "time": 1357049999,
+  "mediantime": 1357048897,
+  "verificationprogress": 0.0006296089201078222,
   "initialblockdownload": true,
-  "chainwork": "0000000000000000000000000000000000000000000000000000000100010001",
-  "size_on_disk": 293,
+  "chainwork": "00000000000000000000000000000000000000000000000000107c1e199b80cf",
+  "size_on_disk": 20633734,
   "pruned": false,
   "warnings": ""
 }
