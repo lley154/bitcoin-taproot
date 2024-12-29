@@ -243,11 +243,104 @@ Native Address: tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
 Segwit Hash (witness program): f831a4aa7afb9831e0269fac83ef8e422b8197b0
 Segwit Version: p2wpkhv0
 ```
-Now transfer the funds to the new address
-```
-(myenv) $ python3 spend_p2wpkh_transaction.py --wif 92JytEnWR9xw9Mi3dbVEK9cvTY16vT1jiZhhy6UyYA39q7QaozE --utxoId 9c352a6417712545a22b3686ecb32b01786093309e93d15af6c3f5f12d8ed776 --utxoIdx 1 --toAddr tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
 
+Create the transaction to transfer the funds to the new address.
 ```
+(myenv) $ python3 spend_p2wpkh_transaction.py --wif 92JytEnWR9xw9Mi3dbVEK9cvTY16vT1jiZhhy6UyYA39q7QaozE --utxoId 9c352a6417712545a22b3686ecb32b01786093309e93d15af6c3f5f12d8ed776 --vout 1 --toAddr tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q --spendAmt 0.00015529 --transferAmt 0.00010000
+tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq
+
+Raw transaction:
+0200000000010176d78e2df1f5c3f65ad1939e30936078012bb3ec86362ba245257117642a359c0100000000ffffffff011027000000000000160014f831a4aa7afb9831e0269fac83ef8e422b8197b000000000
+
+Raw signed transaction:
+0200000000010176d78e2df1f5c3f65ad1939e30936078012bb3ec86362ba245257117642a359c0100000000ffffffff011027000000000000160014f831a4aa7afb9831e0269fac83ef8e422b8197b00247304402200ea6e38ec6760e5dae1811af386fa44e550060b8aed0b02af2f0e755354e172f02200306df47154cd00f2ee974bd049d303e3d3304c0ef5453c5b7d0efdcca4b163f012103b4336f5bc409abeab5290dccf717fdf701a1f6bd5a1fb4504cb59d31c05216fe00000000
+
+TxId: 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab
+(myenv) lawrence@80e3b38f7216:~/bitcoin-transaction/scripts$ 
+```
+Test that the transaction is valid.
+```
+(myenv) $ bitcoin-cli -testnet testmempoolaccept '["0200000000010176d78e2df1f5c3f65ad1939e30936078012bb3ec86362ba245257117642a359c0100000000ffffffff011027000000000000160014f831a4aa7afb9831e0269fac83ef8e422b8197b00247304402200ea6e38ec6760e5dae1811af386fa44e550060b8aed0b02af2f0e755354e172f02200306df47154cd00f2ee974bd049d303e3d3304c0ef5453c5b7d0efdcca4b163f012103b4336f5bc409abeab5290dccf717fdf701a1f6bd5a1fb4504cb59d31c05216fe00000000"]'
+[
+  {
+    "txid": "87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab",
+    "wtxid": "8bc0475047c378a64d0bb6ca628ea5a8f83b3693fe4319635221af3c7eae4d57",
+    "allowed": true,
+    "vsize": 110,
+    "fees": {
+      "base": 0.00005529,
+      "effective-feerate": 0.00050263,
+      "effective-includes": [
+        "8bc0475047c378a64d0bb6ca628ea5a8f83b3693fe4319635221af3c7eae4d57"
+      ]
+    }
+  }
+]
+```
+Check that there are enough network connects to broadcast the transaction
+```
+(myenv)$ bitcoin-cli -testnet getnetworkinfo
+{
+  "version": 270000,
+  "subversion": "/Satoshi:27.0.0/",
+  "protocolversion": 70016,
+  "localservices": "0000000000000c09",
+  "localservicesnames": [
+    "NETWORK",
+    "WITNESS",
+    "NETWORK_LIMITED",
+    "P2P_V2"
+  ],
+  "localrelay": true,
+  "timeoffset": -1,
+  "networkactive": true,
+  "connections": 10,
+  "connections_in": 0,
+  "connections_out": 10,
+  "networks": [
+    {
+      "name": "ipv4",
+      "limited": false,
+      "reachable": true,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "ipv6",
+      "limited": false,
+      "reachable": true,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "onion",
+      "limited": true,
+      "reachable": false,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "i2p",
+      "limited": true,
+      "reachable": false,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    },
+    {
+      "name": "cjdns",
+      "limited": true,
+      "reachable": false,
+      "proxy": "",
+      "proxy_randomize_credentials": false
+    }
+  ],
+  "relayfee": 0.00001000,
+  "incrementalfee": 0.00001000,
+  "localaddresses": [
+  ],
+  "warnings": "Unknown new rules activated (versionbit 28)"
+}
+
 
 
 
