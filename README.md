@@ -3,17 +3,20 @@
 Connect and log into the docker Ubuntu 24.10 Linux container with the user created in [Docker Setup](https://github.com/lley154/docker-setup).
 
 ### Download and run a Bitcoin Testnet node
+## On the Host machine (not the docker instance)
 ```
 $ sudo apt update
 $ sudo apt-get install lz4
-$ cd /data
+$ cd /home/your-username/docker-data
 $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-base.tar.lz4
 $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-part-3603026.tar.lz4
-$ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C /data
-$ lz4 -dc bitcoin-testnet-part-3603026.tar.lz4 | tar xf - -C /data
+$ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C .
+$ lz4 -dc bitcoin-testnet-part-3603026.tar.lz4 | tar xf - -C .
+```
+## Inside the docker container
+```
 $ cd ~/.bitcoin
 $ ln -s /data/testnet3/
-
 ```
 Update the bitcoin.conf testnet(test) settings
 ```
@@ -37,49 +40,92 @@ Bitcoin Core starting
 ```
 Check that the node is connecting to the bitcoin testnet
 ```
-$ tail -f testnet3/debug.log
+$ tail -f testnet3/debug.log 
+2024-12-29T20:07:08Z * Using 2.0 MiB for block index database
+2024-12-29T20:07:08Z * Using 56.0 MiB for transaction index database
+2024-12-29T20:07:08Z * Using 8.0 MiB for chain state database
+2024-12-29T20:07:08Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2024-12-29T20:07:08Z init message: Loading block index…
+2024-12-29T20:07:08Z Assuming ancestors of block 000000000001323071f38f21ea5aae529ece491eadaccce506a59bcc2d968917 have valid signatures.
+2024-12-29T20:07:08Z Setting nMinimumChainWork=000000000000000000000000000000000000000000000c59b14e264ba6c15db9
+2024-12-29T20:07:08Z Opening LevelDB in /home/lawrence/.bitcoin/testnet3/blocks/index
+2024-12-29T20:07:08Z Opened LevelDB successfully
+2024-12-29T20:07:08Z Using obfuscation key for /home/lawrence/.bitcoin/testnet3/blocks/index: 0000000000000000
+
+2024-12-29T20:07:36Z LoadBlockIndexDB: last block file = 1091
+2024-12-29T20:07:36Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=24, size=15129299, heights=3603003...3603026, time=2024-12-29...2024-12-29)
+2024-12-29T20:07:36Z Checking all blk files are present...
+2024-12-29T20:07:44Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2024-12-29T20:07:44Z Opening LevelDB in /home/lawrence/.bitcoin/testnet3/chainstate
+2024-12-29T20:07:45Z Opened LevelDB successfully
+2024-12-29T20:07:45Z Using obfuscation key for /home/lawrence/.bitcoin/testnet3/chainstate: a561a8ba84e35414
+2024-12-29T20:07:47Z Loaded best chain: hashBestChain=00000000000001bd7abacc15392cbb2e23cb9c7c5b26cc82207204b2893b8a8a height=3603026 date=2024-12-29T05:57:24Z progress=0.999815
+2024-12-29T20:07:47Z Opening LevelDB in /home/lawrence/.bitcoin/testnet3/chainstate
+2024-12-29T20:07:47Z Opened LevelDB successfully
+2024-12-29T20:07:47Z Using obfuscation key for /home/lawrence/.bitcoin/testnet3/chainstate: a561a8ba84e35414
+2024-12-29T20:07:47Z [Chainstate [ibd] @ height 3603026 (00000000000001bd7abacc15392cbb2e23cb9c7c5b26cc82207204b2893b8a8a)] resized coinsdb cache to 8.0 MiB
+2024-12-29T20:07:47Z [Chainstate [ibd] @ height 3603026 (00000000000001bd7abacc15392cbb2e23cb9c7c5b26cc82207204b2893b8a8a)] resized coinstip cache to 384.0 MiB
+2024-12-29T20:07:47Z init message: Verifying blocks…
+2024-12-29T20:07:47Z Verifying last 6 blocks at level 3
+2024-12-29T20:07:47Z Verification progress: 0%
+2024-12-29T20:07:53Z Verification progress: 16%
+2024-12-29T20:08:02Z Verification progress: 33%
 ...
-2024-12-29T15:07:57Z [net] received: headers (162003 bytes) peer=1
-2024-12-29T15:07:58Z [net] sending getheaders (101 bytes) peer=1
-2024-12-29T15:07:58Z [net] more getheaders (from 000000000e66bc2f4dd31f17a263e06a3a671472994f89d87afa9c41e10396a7) to peer=1
-2024-12-29T15:07:58Z [net] received: headers (162003 bytes) peer=1
-2024-12-29T15:07:58Z [net] sending getheaders (101 bytes) peer=1
-2024-12-29T15:07:58Z [net] more getheaders (from 00000000017e3d14b56b61cc3f21d55a740e88e974393bc1495a657a17a75154) to peer=1
-2024-12-29T15:07:58Z Pre-synchronizing blockheaders, height: 136000 (~18.85%)
+2024-12-29T20:08:14Z Verification progress: 99%
+2024-12-29T20:08:14Z Verification: No coin database inconsistencies in last 6 blocks (8045 transactions)
+2024-12-29T20:08:14Z  block index           65576ms
+2024-12-29T20:08:14Z Opening LevelDB in /home/lawrence/.bitcoin/testnet3/indexes/txindex
+2024-12-29T20:08:14Z Opened LevelDB successfully
+2024-12-29T20:08:14Z Using obfuscation key for /home/lawrence/.bitcoin/testnet3/indexes/txindex: 0000000000000000
+2024-12-29T20:08:14Z Setting NODE_NETWORK on non-prune mode
+2024-12-29T20:08:14Z block tree size = 3659403
+2024-12-29T20:08:14Z nBestHeight = 3603026
+2024-12-29T20:08:14Z initload thread start
+2024-12-29T20:08:14Z txindex thread start
+2024-12-29T20:08:14Z txindex is enabled at height 3603026
+2024-12-29T20:08:14Z txindex thread exit
+2024-12-29T20:08:14Z Loading 0 mempool transactions from disk...
+2024-12-29T20:08:14Z Imported mempool transactions from disk: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2024-12-29T20:08:14Z Bound to 127.0.0.1:18334
+2024-12-29T20:08:14Z initload thread exit
+2024-12-29T20:08:14Z Bound to [::]:18333
+2024-12-29T20:08:14Z Bound to 0.0.0.0:18333
+2024-12-29T20:08:14Z Loaded 2 addresses from "anchors.dat"
+2024-12-29T20:08:14Z 2 block-relay-only anchors will be tried for connections.
+2024-12-29T20:08:14Z init message: Starting network threads…
+2024-12-29T20:08:14Z dnsseed thread start
+2024-12-29T20:08:14Z opencon thread start
+2024-12-29T20:08:14Z msghand thread start
+2024-12-29T20:08:14Z init message: Done loading
+2024-12-29T20:08:14Z Waiting 300 seconds before querying DNS seeds.
+2024-12-29T20:08:14Z addcon thread start
+2024-12-29T20:08:14Z net thread start
+2024-12-29T20:08:15Z New block-relay-only v1 peer connected: version: 70016, blocks=3603850, peer=0
+2024-12-29T20:08:15Z Leaving InitialBlockDownload (latching to false)
+2024-12-29T20:08:15Z Saw new header hash=000000000105cb80e8c42db51d0afeb0d043934207ec14f4c4002bc11f4d2da5 height=3603027
+2024-12-29T20:08:15Z Saw new header hash=00000000000002173858f78ba4f64afde7137fde0414d31a5fdf1444e4d0c7f6 height=3603028
 ...
-2024-12-29T15:13:19Z [validation] Saw new header hash=0000000033929c568ffb4c1f1f5f26bbab489c7c9ecf16a3243ee7e02d1d5252 height=931897
-2024-12-29T15:13:19Z [validation] Saw new header hash=00000000188f38dad689f41991aaf2a9595d69788f24a90085effb15e686ac18 height=931898
-2024-12-29T15:13:19Z [validation] Saw new header hash=0000000025f9690dd03896935bdea27c567e77790e3f5bdc8c7eb3586f159885 height=931899
 ...
 
 ```
-It may take some time for the node to sync to the network and will need to see the height at the current level as seen in the block explorer.
+It may take some time for the node to sync to the network and you can see the height at the current level as seen in the block explorer.
 https://blockstream.info/testnet/
 ```
-$ tail -f testnet3/debug.log
-...
-2024-12-29T15:28:16Z UpdateTip: new best=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db height=35553 version=0x00000002 log2_work=51.065646 tx=57727 date='2012-11-07T08:49:16Z' progress=0.000504 cache=6.3MiB(46533txo)
-2024-12-29T15:28:16Z [bench]   - Connect postprocess: 1.82ms [14.66s (0.41ms/blk)]
-2024-12-29T15:28:16Z [bench] - Connect block: 31.94ms [110.77s (3.12ms/blk)]
-2024-12-29T15:28:16Z [validation] Enqueuing BlockConnected: block hash=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db block height=35553
-2024-12-29T15:28:16Z [validation] Enqueuing UpdatedBlockTip: new block hash=0000000000868abb1cf5cf1d8b477e42e2eb0091881912c795abb4fb8f5aa1db fork block hash=0000000000bcf28bcc3f375dea612ab1b589bec0fe76808d3485d4ea7d06ec04 (in IBD=true)
-...
-
 $ bitcoin-cli -testnet getblockchaininfo
 {
   "chain": "test",
-  "blocks": 46170,
-  "headers": 3603648,
-  "bestblockhash": "0000000001051da4ff6f7842db40bac435332bddc406abedf871d03d6487c7a9",
-  "difficulty": 16,
-  "time": 1357049999,
-  "mediantime": 1357048897,
-  "verificationprogress": 0.0006296089201078222,
-  "initialblockdownload": true,
-  "chainwork": "00000000000000000000000000000000000000000000000000107c1e199b80cf",
-  "size_on_disk": 20633734,
+  "blocks": 3603194,
+  "headers": 3603850,
+  "bestblockhash": "00000000000001108ceff0f77f85b23e2223e6067c1a132e18879fa78adccfe6",
+  "difficulty": 4027453.665054945,
+  "time": 1735459086,
+  "mediantime": 1735459086,
+  "verificationprogress": 0.9998396507242174,
+  "initialblockdownload": false,
+  "chainwork": "0000000000000000000000000000000000000000000013ac9da9f913fca12013",
+  "size_on_disk": 162303438011,
   "pruned": false,
-  "warnings": ""
+  "warnings": "Unknown new rules activated (versionbit 28)"
 }
 
 ```
