@@ -3,7 +3,7 @@
 Connect and log into the docker Ubuntu 24.10 Linux container with the user created in [Docker Setup](https://github.com/lley154/docker-setup).
 
 ### Download and run a Bitcoin Testnet node
-## On the Host machine (not the docker instance)
+On the Host machine (not the docker instance)
 ```
 $ sudo apt update
 $ sudo apt-get install lz4
@@ -13,7 +13,7 @@ $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-part-3603026.tar.l
 $ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C .
 $ lz4 -dc bitcoin-testnet-part-3603026.tar.lz4 | tar xf - -C .
 ```
-## Inside the docker container
+Log into the docker container, go to the .bitcoin directory, and create a symbolic link to the external /data directory containing the Bitcoin Testnet blockchain data.
 ```
 $ cd ~/.bitcoin
 $ ln -s /data/testnet3/
@@ -35,7 +35,7 @@ listenonion=0
 ```
 Startup ```bitcoind``` and confirm it is sync'd to the Bitcoin testnet.
 ```
-$ bitcoind -testnet debug
+$ bitcoind -testnet
 Bitcoin Core starting
 ```
 Check that the node is connecting to the bitcoin testnet
@@ -104,11 +104,10 @@ $ tail -f testnet3/debug.log
 2024-12-29T20:08:15Z Leaving InitialBlockDownload (latching to false)
 2024-12-29T20:08:15Z Saw new header hash=000000000105cb80e8c42db51d0afeb0d043934207ec14f4c4002bc11f4d2da5 height=3603027
 2024-12-29T20:08:15Z Saw new header hash=00000000000002173858f78ba4f64afde7137fde0414d31a5fdf1444e4d0c7f6 height=3603028
-...
-...
-
 ```
+
 It may take some time for the node to sync to the network and you can see the height at the current level as seen in the block explorer.
+
 https://blockstream.info/testnet/
 ```
 $ bitcoin-cli -testnet getblockchaininfo
@@ -130,7 +129,7 @@ $ bitcoin-cli -testnet getblockchaininfo
 
 ```
 
-### Setup Python environment 
+### Setup Python environment in the Docker container
 ```
 $ cd ~
 $ sudo apt install python3-pip
