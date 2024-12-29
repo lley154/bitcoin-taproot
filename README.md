@@ -191,29 +191,38 @@ Next, wait for the block to show up in the local bitcoin testnet node
 (myenv) $ bitcoin-cli -testnet getblockchaininfo
 {
   "chain": "test",
-  "blocks": 126091,
-  "headers": 3603660,
-  "bestblockhash": "00000000000cc92bff3474dcbe8754ea8f6e076dc04d496afdf01a1c7c4fd253",
-  "difficulty": 4695.811349800574,
-  "time": 1382108740,
-  "mediantime": 1382108588,
-  "verificationprogress": 0.005912187771062559,
-  "initialblockdownload": true,
-  "chainwork": "000000000000000000000000000000000000000000000000016d7dc4a2c80d38",
-  "size_on_disk": 237315970,
+  "blocks": 3603891,
+  "headers": 3603891,
+  "bestblockhash": "0000000002e43fa5cc84808b469822db1887024a93823a9f8438b9eacdb0192a",
+  "difficulty": 1,
+  "time": 1735513241,
+  "mediantime": 1735512040,
+  "verificationprogress": 1,
+  "initialblockdownload": false,
+  "chainwork": "0000000000000000000000000000000000000000000013ad042b437e4187d932",
+  "size_on_disk": 162766141959,
   "pruned": false,
-  "warnings": ""
+  "warnings": "Unknown new rules activated (versionbit 28)"
 }
 
 (myenv) $ bitcoin-cli -testnet scantxoutset start '["addr(tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq)"]'
 {
   "success": true,
-  "txouts": 21448937,
-  "height": 1514263,
-  "bestblock": "00000000000001e7d62e4d3bc7ebe2b6c14fb55154084257f2be2bb4bbcabb18",
+  "txouts": 186043158,
+  "height": 3603891,
+  "bestblock": "0000000002e43fa5cc84808b469822db1887024a93823a9f8438b9eacdb0192a",
   "unspents": [
+    {
+      "txid": "9c352a6417712545a22b3686ecb32b01786093309e93d15af6c3f5f12d8ed776",
+      "vout": 1,
+      "scriptPubKey": "0014197807f22313638cf885a685e05416202c2188f0",
+      "desc": "addr(tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq)#ldvchfv6",
+      "amount": 0.00015529,
+      "coinbase": false,
+      "height": 3603664
+    }
   ],
-  "total_amount": 0.00000000
+  "total_amount": 0.00015529
 }
 ```
 ## Transfer Funds
@@ -236,7 +245,7 @@ Segwit Version: p2wpkhv0
 ```
 Now transfer the funds to the new address
 ```
-(myenv) python3 $spend_p2wpkh_transaction.py --wif 92MyQw9orqNdTYaeEDRcidKhGyY93gyACjXHdPoCQiryq7pPJWF --utxoId 057f1e116b7b12bb1c2b64603ae1152b44baaff75f5722cfa10bd294a1c2cd81 --utxoIdx 0 --toAddr tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
+(myenv) $ python3 spend_p2wpkh_transaction.py --wif 92JytEnWR9xw9Mi3dbVEK9cvTY16vT1jiZhhy6UyYA39q7QaozE --utxoId 9c352a6417712545a22b3686ecb32b01786093309e93d15af6c3f5f12d8ed776 --utxoIdx 1 --toAddr tb1qlqc6f2n6lwvrrcpxn7kg8muwgg4cr9as0lqk0q
 
 ```
 
