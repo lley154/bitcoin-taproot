@@ -114,48 +114,51 @@ Seed (hex): 539848603f05552138c29b1e5898c8097fd1a9426ff2881688b441e70ceccafb4f0a
 ```
 Create private key in WIF format
 ```
-(myenv) $ python3 private-keys.py –-seed “sister object cereal ride sniff yellow virus brief work merry employ flat west arch live curious come magnet advice chalk steel chief grab promote”
-Private key (Testnet WIF): 92MyQw9orqNdTYaeEDRcidKhGyY93gyACjXHdPoCQiryq7pPJWF
+(myenv) $ python3 private-keys.py --seed "sister object cereal ride sniff yellow virus brief work merry employ flat west arch live curious come magnet advice chalk steel chief grab promote"
+Private key (Testnet WIF): 92JytEnWR9xw9Mi3dbVEK9cvTY16vT1jiZhhy6UyYA39q7QaozE
 ```
 Create a segwit address using the private key
 ```
-(myenv) $ python3 segwit-address.py --wif 92MyQw9orqNdTYaeEDRcidKhGyY93gyACjXHdPoCQiryq7pPJWF
+(myenv) $ python3 segwit-address.py --wif 92JytEnWR9xw9Mi3dbVEK9cvTY16vT1jiZhhy6UyYA39q7QaozE
 
-Private key WIF: cR1Zze1spxWTvAPVKKqeejKWmWYSWsQscnggPdcuMhmbqGXrNQV8
-Public key: 032fb631f581add2ba8a1226442812e6bf6147c66abb6eae9855f46e9b6374b580
-Native Address: tb1qfyanzs5hprvzyt7mwurmlq9vnz64w9xntgvgzz
-Segwit Hash (witness program): 493b31429708d8222fdb7707bf80ac98b55714d3
+Private key WIF: cQnN59qrqcZsytQAcXDbm73Yx7qT8upFYTLfpbCUYWtVxtxmM6JD
+Public key: 03b4336f5bc409abeab5290dccf717fdf701a1f6bd5a1fb4504cb59d31c05216fe
+Native Address: tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq
+Segwit Hash (witness program): 197807f22313638cf885a685e05416202c2188f0
 Segwit Version: p2wpkhv0
 ```
 ## Bitcoin Testnet Faucet
-Using a Bitcoin testnet faucet, send some funds to the segwit address
+Using a Bitcoin testnet faucet, send some funds to the segwit address tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq
 
 https://coinfaucet.eu/en/btc-testnet/
 
 Look at the transaction on a blockchain explorer
 
-https://blockstream.info/testnet/tx/057f1e116b7b12bb1c2b64603ae1152b44baaff75f5722cfa10bd294a1c2cd81
+![image](https://github.com/user-attachments/assets/4d42ef46-0312-4267-a5d1-c026a8653d81)
 
-Next, wait for the UTXO to show up in the local bitcoin testnet node
+https://blockstream.info/testnet/tx/9c352a6417712545a22b3686ecb32b01786093309e93d15af6c3f5f12d8ed776 
+
+Next, wait for the block to show up in the local bitcoin testnet node
+
 ```
 (myenv) $ bitcoin-cli -testnet getblockchaininfo
 {
   "chain": "test",
-  "blocks": 2231687,
-  "headers": 3591118,
-  "bestblockhash": "000000000000e1dc72b684468691a821c03adb5e7a5e7cdee7c96c06c2c42c0e",
-  "difficulty": 6.335250616269515,
-  "time": 1653527384,
-  "mediantime": 1653527381,
-  "verificationprogress": 0.5496184945503476,
+  "blocks": 126091,
+  "headers": 3603660,
+  "bestblockhash": "00000000000cc92bff3474dcbe8754ea8f6e076dc04d496afdf01a1c7c4fd253",
+  "difficulty": 4695.811349800574,
+  "time": 1382108740,
+  "mediantime": 1382108588,
+  "verificationprogress": 0.005912187771062559,
   "initialblockdownload": true,
-  "chainwork": "00000000000000000000000000000000000000000000069f7e84745022cf6c2c",
-  "size_on_disk": 30917379976,
+  "chainwork": "000000000000000000000000000000000000000000000000016d7dc4a2c80d38",
+  "size_on_disk": 237315970,
   "pruned": false,
   "warnings": ""
 }
 
-(myenv) $ bitcoin-cli -testnet scantxoutset start '["addr(tb1qfyanzs5hprvzyt7mwurmlq9vnz64w9xntgvgzz)"]'
+(myenv) $ bitcoin-cli -testnet scantxoutset start '["addr(tb1qr9uq0u3rzd3ce7y956z7q4qkyqkzrz8sytwvmq)"]'
 {
   "success": true,
   "txouts": 21448937,
