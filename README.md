@@ -2,8 +2,81 @@
 ## Setup
 Connect and log into the docker Ubuntu 24.10 Linux container with the user created in [Docker Setup](https://github.com/lley154/docker-setup).
 
+### Download and run a Bitcoin Testnet node
 ```
 $ sudo apt update
+$ sudo apt-get install lz4
+$ cd /data
+$ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-base.tar.lz4
+$ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C /data
+$ cd ~/.bitcoin
+$ ln -s /data/testnet3/
+
+```
+Update the bitcoin.conf testnet(test) settings
+```
+$ nano bitcoin.conf
+...
+[test]
+daemon=1
+txindex=1
+server=1
+rpcuser=test
+rpcpassword=test1234
+rpcallowip=127.0.0.1
+fallbackfee=0.0001
+# Disable Tor onion service (default: 1)
+listenonion=0
+```
+Startup ```bitcoind``` and confirm it is sync'd to the Bitcoin testnet.
+```
+$ bitcoind -testnet debug
+Bitcoin Core starting
+```
+Check that the node is connecting to the bitcoin testnet
+```
+$ tail -f testnet3/debug.log
+...
+2024-12-29T15:07:57Z [net] received: headers (162003 bytes) peer=1
+2024-12-29T15:07:58Z [net] sending getheaders (101 bytes) peer=1
+2024-12-29T15:07:58Z [net] more getheaders (from 000000000e66bc2f4dd31f17a263e06a3a671472994f89d87afa9c41e10396a7) to peer=1
+2024-12-29T15:07:58Z [net] received: headers (162003 bytes) peer=1
+2024-12-29T15:07:58Z [net] sending getheaders (101 bytes) peer=1
+2024-12-29T15:07:58Z [net] more getheaders (from 00000000017e3d14b56b61cc3f21d55a740e88e974393bc1495a657a17a75154) to peer=1
+2024-12-29T15:07:58Z Pre-synchronizing blockheaders, height: 136000 (~18.85%)
+...
+2024-12-29T15:13:19Z [validation] Saw new header hash=0000000033929c568ffb4c1f1f5f26bbab489c7c9ecf16a3243ee7e02d1d5252 height=931897
+2024-12-29T15:13:19Z [validation] Saw new header hash=00000000188f38dad689f41991aaf2a9595d69788f24a90085effb15e686ac18 height=931898
+2024-12-29T15:13:19Z [validation] Saw new header hash=0000000025f9690dd03896935bdea27c567e77790e3f5bdc8c7eb3586f159885 height=931899
+...
+
+```
+It may take some time for the node to sync to the network and will need to see the height at the current level as seen in the block explorer.
+https://blockstream.info/testnet/
+```
+
+$ bitcoin-cli -testnet getblockchaininfo
+{
+  "chain": "test",
+  "blocks": 0,
+  "headers": 25559,
+  "bestblockhash": "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943",
+  "difficulty": 1,
+  "time": 1296688602,
+  "mediantime": 1296688602,
+  "verificationprogress": 8.728336274153364e-09,
+  "initialblockdownload": true,
+  "chainwork": "0000000000000000000000000000000000000000000000000000000100010001",
+  "size_on_disk": 293,
+  "pruned": false,
+  "warnings": ""
+}
+
+```
+
+### Setup Python environment 
+```
+$ cd ~
 $ sudo apt install python3-pip
 $ sudo apt install python3.12-venv
 ```
