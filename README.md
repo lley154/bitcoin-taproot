@@ -8,7 +8,9 @@ $ sudo apt update
 $ sudo apt-get install lz4
 $ cd /data
 $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-base.tar.lz4
+$ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-part-3603026.tar.lz4
 $ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C /data
+$ lz4 -dc bitcoin-testnet-part-3603026.tar.lz4 | tar xf - -C /data
 $ cd ~/.bitcoin
 $ ln -s /data/testnet3/
 
