@@ -425,10 +425,11 @@ $ bitcoin-cli -testnet getrawtransaction 87c482200fe3536af53072405ffd082f2cb56f7
 }
 ```
 Finally, check that the transaction can be found in a blockchain explorer
-```
+
+![image](https://github.com/user-attachments/assets/b18f6cc1-b504-478c-ade0-1d8f4d3ce8e1)
+
 https://blockstream.info/testnet/tx/87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab
 
-```
 ## Get mempool info including fee estimates
 ```
 $ bitcoin-cli -testnet getmempoolinfo
