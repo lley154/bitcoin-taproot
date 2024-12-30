@@ -2,7 +2,7 @@
 ## Setup
 Connect and log into the docker Ubuntu 24.10 Linux container with the user created in [Docker Setup](https://github.com/lley154/docker-setup).
 
-### Download and run a Bitcoin Testnet node
+### Download and run a Bitcoin Testnet node 
 On the Host machine (not the docker instance)
 ```
 $ sudo apt update
@@ -128,7 +128,6 @@ $ bitcoin-cli -testnet getblockchaininfo
 }
 
 ```
-
 ### Setup Python environment in the Docker container
 ```
 $ cd ~
@@ -277,6 +276,7 @@ Test that the transaction is valid.
   }
 ]
 ```
+### Submit the transaction
 Check that there are enough network connections to broadcast the transaction.
 ```
 (myenv)$ bitcoin-cli -testnet getnetworkinfo
