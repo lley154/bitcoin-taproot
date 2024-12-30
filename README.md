@@ -3,7 +3,8 @@
 Connect and log into the docker Ubuntu 24.10 Linux container with the user created in [Docker Setup](https://github.com/lley154/docker-setup).
 
 ### Download and run a Bitcoin Testnet node 
-On the Host machine (not the docker instance)
+On the Host machine (not the docker instance). 
+Warning: these are very large files.
 ```
 $ sudo apt update
 $ sudo apt-get install lz4
@@ -12,6 +13,11 @@ $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-base.tar.lz4
 $ curl -L -O https://snapshots.publicnode.com/bitcoin-testnet-part-3603026.tar.lz4
 $ lz4 -dc bitcoin-testnet-base.tar.lz4 | tar xf - -C .
 $ lz4 -dc bitcoin-testnet-part-3603026.tar.lz4 | tar xf - -C .
+$ ls -lh
+total 108G
+-rw-rw-r-- 1 your-username your-groupname  18G Dec 28 16:01 bitcoin-testnet-base.tar.lz4
+-rw-rw-r-- 1 your-username your-groupname  90G Dec 29 12:21 bitcoin-testnet-part-3603026.tar.lz4
+drwxrwxr-x 5 your-username your-groupname 4.0K Dec 29 23:28 testnet3
 ```
 Log into the docker container, go to the .bitcoin directory, and create a symbolic link to the external /data directory containing the Bitcoin Testnet blockchain data.
 ```
@@ -276,7 +282,7 @@ Test that the transaction is valid.
   }
 ]
 ```
-## Submit the transaction
+## Submit the transaction (Optional Assignment)
 Check that there are enough network connections to broadcast the transaction.
 ```
 (myenv)$ bitcoin-cli -testnet getnetworkinfo
