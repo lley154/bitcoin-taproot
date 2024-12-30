@@ -344,7 +344,7 @@ Check that there are enough network connections to broadcast the transaction.
 (myenv) $ bitcoin-cli -testnet sendrawtransaction "0200000000010176d78e2df1f5c3f65ad1939e30936078012bb3ec86362ba245257117642a359c0100000000ffffffff011027000000000000160014f831a4aa7afb9831e0269fac83ef8e422b8197b00247304402200ea6e38ec6760e5dae1811af386fa44e550060b8aed0b02af2f0e755354e172f02200306df47154cd00f2ee974bd049d303e3d3304c0ef5453c5b7d0efdcca4b163f012103b4336f5bc409abeab5290dccf717fdf701a1f6bd5a1fb4504cb59d31c05216fe00000000"
 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab
 
-$ bitcoin-cli -testnet getmempoolinfo
+(myenv) $ bitcoin-cli -testnet getmempoolinfo
 {
   "loaded": true,
   "size": 49487,
@@ -359,7 +359,7 @@ $ bitcoin-cli -testnet getmempoolinfo
   "fullrbf": false
 }
 
-$ bitcoin-cli -testnet getmempoolentry 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab 
+(myenv) $ bitcoin-cli -testnet getmempoolentry 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab 
 {
   "vsize": 110,
   "weight": 437,
@@ -384,7 +384,7 @@ $ bitcoin-cli -testnet getmempoolentry 87c482200fe3536af53072405ffd082f2cb56f72a
   "unbroadcast": false
 }
 
-$ bitcoin-cli -testnet getrawtransaction 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab true
+(myenv) $ bitcoin-cli -testnet getrawtransaction 87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab true
 {
   "txid": "87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab",
   "hash": "8bc0475047c378a64d0bb6ca628ea5a8f83b3693fe4319635221af3c7eae4d57",
@@ -432,7 +432,7 @@ https://blockstream.info/testnet/tx/87c482200fe3536af53072405ffd082f2cb56f72ab14
 
 ## Get mempool info including fee estimates
 ```
-$ bitcoin-cli -testnet getmempoolinfo
+(myenv) $ bitcoin-cli -testnet getmempoolinfo
 {
   "loaded": true,
   "size": 56476,
@@ -449,17 +449,17 @@ $ bitcoin-cli -testnet getmempoolinfo
 ```
 ## Get fee estimates for different priorities (blocks)
 ```
-$ bitcoin-cli -testnet estimatesmartfee 1 
+(myenv) $ bitcoin-cli -testnet estimatesmartfee 1 
 {
   "feerate": 0.01213509,
   "blocks": 2
 }
-$ bitcoin-cli -testnet estimatesmartfee 6 
+(myenv) $ bitcoin-cli -testnet estimatesmartfee 6 
 {
   "feerate": 0.00525437,
   "blocks": 6
 }
-$ bitcoin-cli -testnet estimatesmartfee 144
+(myenv) $ bitcoin-cli -testnet estimatesmartfee 144
 {
   "feerate": 0.00223070,
   "blocks": 70
