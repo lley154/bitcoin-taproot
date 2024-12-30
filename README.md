@@ -292,10 +292,10 @@ Check that there are enough network connects to broadcast the transaction
     "P2P_V2"
   ],
   "localrelay": true,
-  "timeoffset": -1,
+  "timeoffset": 0,
   "networkactive": true,
-  "connections": 10,
-  "connections_in": 0,
+  "connections": 17,
+  "connections_in": 7,
   "connections_out": 10,
   "networks": [
     {
@@ -340,6 +340,26 @@ Check that there are enough network connects to broadcast the transaction
   ],
   "warnings": "Unknown new rules activated (versionbit 28)"
 }
+
+(myenv) $ bitcoin-cli -testnet sendrawtransaction "0200000000010176d78e2df1f5c3f65ad1939e30936078012bb3ec86362ba245257117642a359c0100000000ffffffff011027000000000000160014f831a4aa7afb9831e0269fac83ef8e422b8197b00247304402200ea6e38ec6760e5dae1811af386fa44e550060b8aed0b02af2f0e755354e172f02200306df47154cd00f2ee974bd049d303e3d3304c0ef5453c5b7d0efdcca4b163f012103b4336f5bc409abeab5290dccf717fdf701a1f6bd5a1fb4504cb59d31c05216fe00000000"
+87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab
+
+$ bitcoin-cli -testnet getmempoolinfo
+{
+  "loaded": true,
+  "size": 49487,
+  "bytes": 14022714,
+  "usage": 61805552,
+  "total_fee": 34.33665170,
+  "maxmempool": 300000000,
+  "mempoolminfee": 0.00001000,
+  "minrelaytxfee": 0.00001000,
+  "incrementalrelayfee": 0.00001000,
+  "unbroadcastcount": 0,
+  "fullrbf": false
+}
+
+
 
 
 
