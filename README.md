@@ -276,7 +276,7 @@ Test that the transaction is valid.
   }
 ]
 ```
-### Submit the transaction
+## Submit the transaction
 Check that there are enough network connections to broadcast the transaction.
 ```
 (myenv)$ bitcoin-cli -testnet getnetworkinfo
@@ -428,6 +428,41 @@ Finally, check that the transaction can be found in a blockchain explorer
 ```
 https://blockstream.info/testnet/tx/87c482200fe3536af53072405ffd082f2cb56f72ab1444d34147916643a7b9ab
 
+```
+## Get mempool info including fee estimates
+```
+$ bitcoin-cli -testnet getmempoolinfo
+{
+  "loaded": true,
+  "size": 56476,
+  "bytes": 16005605,
+  "usage": 70426736,
+  "total_fee": 43.03372300,
+  "maxmempool": 300000000,
+  "mempoolminfee": 0.00001000,
+  "minrelaytxfee": 0.00001000,
+  "incrementalrelayfee": 0.00001000,
+  "unbroadcastcount": 0,
+  "fullrbf": false
+}
+```
+## Get fee estimates for different priorities (blocks)
+```
+lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 1 
+{
+  "feerate": 0.01213509,
+  "blocks": 2
+}
+lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 6 
+{
+  "feerate": 0.00525437,
+  "blocks": 6
+}
+lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 144
+{
+  "feerate": 0.00223070,
+  "blocks": 70
+}
 ```
 
 
