@@ -448,17 +448,17 @@ $ bitcoin-cli -testnet getmempoolinfo
 ```
 ## Get fee estimates for different priorities (blocks)
 ```
-lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 1 
+$ bitcoin-cli -testnet estimatesmartfee 1 
 {
   "feerate": 0.01213509,
   "blocks": 2
 }
-lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 6 
+$ bitcoin-cli -testnet estimatesmartfee 6 
 {
   "feerate": 0.00525437,
   "blocks": 6
 }
-lawrence@a17b74a712fa:~/.bitcoin$ bitcoin-cli -testnet estimatesmartfee 144
+$ bitcoin-cli -testnet estimatesmartfee 144
 {
   "feerate": 0.00223070,
   "blocks": 70
