@@ -21,32 +21,30 @@ def main():
     parser = argparse.ArgumentParser(description='Spend transaction from WIF key and UTXO')
     parser.add_argument('--wif', type=str, required=True, help='WIF private key')
     parser.add_argument('--utxoId', type=str, required=True, help='UtxoId to spend')
-    parser.add_argument('--utxoIdx', type=str, required=True, help='UtxoIdx to spend')
+    parser.add_argument('--vout', type=int, required=True, help='vout of utxoId')
     parser.add_argument('--toAddr', type=str, required=True, help='To Address')
+    parser.add_argument('--spendAmt', type=float, required=True, help='The amount to spend from a UTXO')
+    parser.add_argument('--transferAmt', type=float, required=True, help='The amount to send to an Address')
     args = parser.parse_args()
 
     # always remember to setup the network
     setup("testnet")
 
-    # the key that corresponds to the P2WPKH address
-    #priv = PrivateKey("cVdte9ei2xsVjmZSPtyucG43YZgNkmKTqhwiUA8M4Fc3LdPJxPmZ")
     # Instantiate from existing WIF key
     priv = PrivateKey.from_wif(args.wif)
-
     pub = priv.get_public_key()
 
     fromAddress = pub.get_segwit_address()
     print(fromAddress.to_string())
 
     # amount is needed to sign the segwit input
-    fromAddressAmount = to_satoshis(0.01)
+    fromAddressAmount = to_satoshis(args.spendAmt)
 
-    # UTXO of fromAddress
-    #txid = "13d2d30eca974e8fa5da11b9608fa36905a22215e8df895e767fc903889367ff"
+    # UTXO of fromAddress 
     txid = args.utxoId
-    vout = args.utxoIdx
+    vout = args.vout
 
-    #toAddress = P2pkhAddress("mrrKUpJnAjvQntPgz2Z4kkyr1gbtHmQv28")
+    # To address from args
     toAddress = P2wpkhAddress(args.toAddr)
 
     # create transaction input from tx id of UTXO
@@ -61,7 +59,7 @@ def main():
     )
 
     # create transaction output
-    txOut = TxOutput(to_satoshis(0.009), toAddress.to_script_pub_key())
+    txOut = TxOutput(to_satoshis(args.transferAmt), toAddress.to_script_pub_key())
 
     # create transaction without change output - if at least a single input is
     # segwit we need to set has_segwit=True
